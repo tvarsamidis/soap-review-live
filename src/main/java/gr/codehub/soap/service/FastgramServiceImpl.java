@@ -3,8 +3,8 @@ package gr.codehub.soap.service;
 import gr.codehub.soap.model.FastgramPost;
 import gr.codehub.soap.repository.FastgramRepository;
 import jakarta.enterprise.context.RequestScoped;
-import jakarta.jws.WebMethod;
-import jakarta.jws.WebService;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 
 import java.util.List;
 
@@ -13,17 +13,15 @@ import java.util.List;
 @RequestScoped
 public class FastgramServiceImpl implements FastgramService {
 
-    private static final FastgramRepository fastgramRepository;
-
-    static {
-        fastgramRepository = new FastgramRepository();
-    }
+    @Inject
+    @Named("FastRepoDb")
+    private FastgramRepository fastgramRepository;
 
     @Override
     public List<FastgramPost> findAll() {
         return fastgramRepository.findAll();
     }
-    
+
     @Override
     public FastgramPost findPostById(int id) {
         return fastgramRepository.findPostById(id);
