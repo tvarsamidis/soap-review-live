@@ -24,4 +24,7 @@ public interface FastgramService {
 
     @WebMethod
     FastgramPost deletePostById(int id);
+    
+    @WebMethod
+    FastgramPost undeletePostById(int id);
 }

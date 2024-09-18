@@ -16,6 +16,7 @@ public class FastgramPost {
     private Date date;
     private String content;
     private int views;
+    private boolean deleted;
     
     public FastgramPost increaseViews() {
         views++;

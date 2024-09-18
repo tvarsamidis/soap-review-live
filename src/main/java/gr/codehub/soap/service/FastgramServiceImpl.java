@@ -51,4 +51,10 @@ public class FastgramServiceImpl implements FastgramService {
     public FastgramPost deletePostById(int id) {
         return fastgramRepository.deletePostById(id);
     }
+
+    @WebMethod
+    @Override
+    public FastgramPost undeletePostById(int id) {
+        return fastgramRepository.undeletePostById(id);
+    }
 }
