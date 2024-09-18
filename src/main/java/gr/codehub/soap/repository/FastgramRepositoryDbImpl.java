@@ -3,6 +3,8 @@ package gr.codehub.soap.repository;
 import gr.codehub.soap.model.FastgramPost;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import java.util.List;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +13,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class FastgramRepositoryDbImpl implements FastgramRepository {
 
+    @PersistenceContext
+    private EntityManager entityManager;
+    
+    
     @Override
     public FastgramPost deletePostById(int id) {
         throw new UnsupportedOperationException("Not supported yet.");
