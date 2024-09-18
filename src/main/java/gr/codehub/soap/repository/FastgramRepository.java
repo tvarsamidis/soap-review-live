@@ -101,7 +101,7 @@ public class FastgramRepository {
                 .filter(p -> p.getId() == id)
                 .findAny();
         if (postOptional.isPresent()) {
-            postOptional.get().setDeleted(true);
+            postOptional.get().setDeleted(deleted);
         }
         return postOptional.get();
     }
