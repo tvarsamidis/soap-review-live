@@ -41,12 +41,14 @@ public class FastgramRepository {
             System.out.println("Invalid date: " + dateStr);
         }
         int views = (int) (Math.random() * 30) + 2;
-        FastgramPost post = new FastgramPost(id, user, date, content, views);
+        FastgramPost post = new FastgramPost(id, user, date, content, views, false);
         return post;
     }
 
     public FastgramPost findPostById(int id) {
         Optional<FastgramPost> currencyOptional = allPosts.stream()
+                // .filter(post -> id == post.getId() && !post.isDeleted())
+                .filter(post -> !post.isDeleted())
                 .filter(post -> id == post.getId())
                 .findAny();
         if (currencyOptional.isPresent()) {
@@ -58,7 +60,8 @@ public class FastgramRepository {
     public FastgramPost findPostByMaxViews() {
         FastgramPost bestPost = null;
         for (FastgramPost post : allPosts) {
-            if (bestPost == null || post.getViews() > bestPost.getViews()) {
+            if (!post.isDeleted() && 
+                    (bestPost == null || post.getViews() > bestPost.getViews())) {
                 bestPost = post;
             }
         }
@@ -70,6 +73,7 @@ public class FastgramRepository {
 
     public List<FastgramPost> findPostsByUser(String user) {
         return allPosts.stream()
+                .filter(post -> !post.isDeleted())
                 .filter(post -> post.getUser().equalsIgnoreCase(user))
                 .map(FastgramPost::increaseViews)
                 .collect(Collectors.toList());
@@ -78,6 +82,7 @@ public class FastgramRepository {
     public List<FastgramPost> findPostsByContent(String content) {
         final String contentLower = content.toLowerCase();
         return allPosts.stream()
+                .filter(post -> !post.isDeleted())
                 .filter(post -> post.getContent().toLowerCase().contains(contentLower))
                 .map(FastgramPost::increaseViews)
                 .collect(Collectors.toList());
@@ -91,15 +96,21 @@ public class FastgramRepository {
         return post;
     }
 
-    public FastgramPost deletePostById(int id) {
+    private FastgramPost setDeletedPostById(int id, boolean deleted) {
         Optional<FastgramPost> postOptional = allPosts.stream()
-                .filter(matchId -> matchId.getId() == id)
+                .filter(p -> p.getId() == id)
                 .findAny();
         if (postOptional.isPresent()) {
-            FastgramPost post = postOptional.get();
-            allPosts.remove(post);
-            return post;
+            postOptional.get().setDeleted(true);
         }
-        return null;
+        return postOptional.get();
+    }
+    
+    public FastgramPost deletePostById(int id) {
+        return setDeletedPostById(id, true);
+    }
+    
+    public FastgramPost undeletePostById(int id) {
+        return setDeletedPostById(id, false);
     }
 }
