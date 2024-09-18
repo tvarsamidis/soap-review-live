@@ -10,6 +10,7 @@ public class SoapReviewLive {
     public static final String SERVICE_WSDL = SERVICE_URI + "?wsdl";
 
     public static void main(String[] args) {
+        System.out.println("LAST WORKING SOAP VERSION OF APPLICATION");
         System.out.println("Starting web service");
         System.out.println("WSDL is : " + SERVICE_WSDL);
         FastgramService fs = new FastgramServiceImpl();
