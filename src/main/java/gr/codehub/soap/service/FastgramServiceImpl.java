@@ -20,6 +20,11 @@ public class FastgramServiceImpl implements FastgramService {
     }
 
     @Override
+    public List<FastgramPost> findAll() {
+        return fastgramRepository.findAll();
+    }
+    
+    @Override
     public FastgramPost findPostById(int id) {
         return fastgramRepository.findPostById(id);
     }

@@ -56,6 +56,10 @@ public class FastgramRepository {
         }
         return null;
     }
+    
+    public List<FastgramPost> findAll() {
+        return allPosts;
+    }
 
     public FastgramPost findPostByMaxViews() {
         FastgramPost bestPost = null;
