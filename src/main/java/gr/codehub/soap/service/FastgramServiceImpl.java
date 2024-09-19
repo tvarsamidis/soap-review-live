@@ -2,7 +2,6 @@ package gr.codehub.soap.service;
 
 import gr.codehub.soap.model.FastgramPost;
 import gr.codehub.soap.repository.FastgramRepository;
-import gr.codehub.soap.repository.FastgramRepositoryDbImpl;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
