@@ -1,16 +1,17 @@
 package gr.codehub.soap.repository;
 
 import gr.codehub.soap.model.FastgramPost;
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import java.util.List;
 import lombok.NoArgsConstructor;
 
 @Named("FastRepoDb")
-@RequestScoped
-@NoArgsConstructor
+@ApplicationScoped
+//@NoArgsConstructor
 public class FastgramRepositoryDbImpl implements FastgramRepository {
 
     @PersistenceContext
@@ -47,9 +48,15 @@ public class FastgramRepositoryDbImpl implements FastgramRepository {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Transactional
     @Override
     public FastgramPost savePost(FastgramPost post) {
-        throw new UnsupportedOperationException("Not supported yet.");
+       if (post.getId() == null) {
+        entityManager.persist(post);
+       } else {
+           post = entityManager.merge(post);
+       }
+       return post;
     }
 
     @Override

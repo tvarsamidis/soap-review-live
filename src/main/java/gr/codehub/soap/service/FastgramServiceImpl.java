@@ -2,15 +2,17 @@ package gr.codehub.soap.service;
 
 import gr.codehub.soap.model.FastgramPost;
 import gr.codehub.soap.repository.FastgramRepository;
+import gr.codehub.soap.repository.FastgramRepositoryDbImpl;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
 import java.util.List;
 
-//@ApplicationScoped
-//@SessionScoped
+@Named("FastService")
 @RequestScoped
+//@SessionScoped
+//@RequestScoped
 public class FastgramServiceImpl implements FastgramService {
 
     @Inject
@@ -43,8 +45,8 @@ public class FastgramServiceImpl implements FastgramService {
     }
 
     @Override
-    public FastgramPost savePost(FastgramPost currency) {
-        return fastgramRepository.savePost(currency);
+    public FastgramPost savePost(FastgramPost post) {
+        return fastgramRepository.savePost(post);
     }
 
     @Override

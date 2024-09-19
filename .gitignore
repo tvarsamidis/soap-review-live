@@ -1,1 +1,10 @@
 /target/
+/.idea/.gitignore
+/.idea/compiler.xml
+/.idea/encodings.xml
+/src/main/java/gr/codehub/soap/repository/FastgramRepositoryDbImpl.java.bak
+/src/main/java/gr/codehub/soap/service/FastgramService.java.bak
+/src/main/java/gr/codehub/soap/service/FastgramServiceImpl.java.bak
+/.idea/jarRepositories.xml
+/.idea/misc.xml
+/.idea/vcs.xml

@@ -35,15 +35,8 @@ public class FastgramPostResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createFastgramPost(FastgramPost post) {
         System.out.println("Received FastgramPostOld: " + post);
-        FastgramPost newPost = new FastgramPost();
-        newPost.setId(post.getId());
-        newPost.setUser(post.getUser());
-        newPost.setDate(post.getDate());
-        newPost.setContent(post.getContent());
-        newPost.setViews(post.getViews());
-        newPost.setDeleted(post.isDeleted());
         fastgramService.savePost(post);
-        return Response.ok(newPost).build();
+        return Response.ok(post).build();
     }
 
 }
