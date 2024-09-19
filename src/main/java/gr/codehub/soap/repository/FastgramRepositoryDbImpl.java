@@ -51,6 +51,7 @@ public class FastgramRepositoryDbImpl implements FastgramRepository {
     @Transactional
     @Override
     public FastgramPost savePost(FastgramPost post) {
+        showRepositoryInfo();
        if (post.getId() == null) {
         entityManager.persist(post);
        } else {
@@ -64,4 +65,7 @@ public class FastgramRepositoryDbImpl implements FastgramRepository {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    private static void showRepositoryInfo() {
+        System.out.println("This is the FastgramRepositoryDbImpl");
+    }
 }
