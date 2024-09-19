@@ -2,8 +2,9 @@ package gr.codehub.soap.resource;
 
 import gr.codehub.soap.model.FastgramPost;
 import gr.codehub.soap.service.FastgramService;
-import gr.codehub.soap.service.FastgramServiceImpl;
 import jakarta.annotation.security.PermitAll;
+import jakarta.inject.Inject;
+import jakarta.inject.Named;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -16,7 +17,9 @@ import java.util.List;
 @Path("postPath")
 public class FastgramPostResource {
 
-    private FastgramService fastgramService = new FastgramServiceImpl();
+    @Inject
+    @Named("FastService")
+    private FastgramService fastgramService;
 
     // http://localhost:8080/fastgramPath/appPath/postPath/getall
     @PermitAll
