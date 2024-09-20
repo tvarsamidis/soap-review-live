@@ -19,8 +19,8 @@ public class FastgramServiceImpl implements FastgramService {
     private FastgramRepository fastgramRepository;
 
     @Override
-    public List<FastgramPost> findAll() {
-        return fastgramRepository.findAll();
+    public List<FastgramPost> findAllPosts() {
+        return fastgramRepository.findAllPosts();
     }
 
     @Override

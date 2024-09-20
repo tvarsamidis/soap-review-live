@@ -24,10 +24,10 @@ public class FastgramPostResource {
     // http://localhost:8080/fastgramPath/appPath/postPath/getall
     @PermitAll
     @GET
-    @Path("findall")
+    @Path("/findallposts")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<FastgramPost> findAll() {
-        List<FastgramPost> posts = fastgramService.findAll();
+    public List<FastgramPost> findAllPosts() {
+        List<FastgramPost> posts = fastgramService.findAllPosts();
         return posts;
     }
 

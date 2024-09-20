@@ -27,8 +27,11 @@ public class FastgramRepositoryDbImpl implements FastgramRepository {
     }
 
     @Override
-    public List<FastgramPost> findAll() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public List<FastgramPost> findAllPosts() {
+        List<FastgramPost> allPosts = entityManager
+                .createQuery("SELECT p FROM FastgramPost p")
+                .getResultList();
+        return allPosts;
     }
 
     @Override

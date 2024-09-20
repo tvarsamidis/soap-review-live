@@ -8,7 +8,7 @@ public interface FastgramRepository {
 
     FastgramPost deletePostById(int id);
 
-    List<FastgramPost> findAll();
+    List<FastgramPost> findAllPosts();
 
     FastgramPost findPostById(int id);
 

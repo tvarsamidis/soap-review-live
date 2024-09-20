@@ -68,7 +68,7 @@ public class FastgramRepositoryListImpl implements FastgramRepository {
     }
     
     @Override
-    public List<FastgramPost> findAll() {
+    public List<FastgramPost> findAllPosts() {
         return allPosts;
     }
 

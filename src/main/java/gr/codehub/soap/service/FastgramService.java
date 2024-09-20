@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface FastgramService {
     
-    List<FastgramPost> findAll();
+    List<FastgramPost> findAllPosts();
     
     FastgramPost findPostById(int id);
 
