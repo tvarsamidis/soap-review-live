@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,7 @@ import lombok.ToString;
 @ToString
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements ClassWithId, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

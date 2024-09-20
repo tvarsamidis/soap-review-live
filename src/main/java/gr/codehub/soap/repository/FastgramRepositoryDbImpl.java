@@ -1,6 +1,8 @@
 package gr.codehub.soap.repository;
 
+import gr.codehub.soap.model.ClassWithId;
 import gr.codehub.soap.model.FastgramPost;
+import gr.codehub.soap.model.User;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Named;
 import jakarta.persistence.EntityManager;
@@ -16,6 +18,8 @@ public class FastgramRepositoryDbImpl implements FastgramRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
+
+    private static boolean shownRepositoryInfo = false;
 
     @Override
     public FastgramPost deletePostById(int id) {
@@ -51,13 +55,22 @@ public class FastgramRepositoryDbImpl implements FastgramRepository {
     @Override
     public FastgramPost savePost(FastgramPost postFromService) {
         showRepositoryInfo();
-        if (postFromService.getId() == null) {
-            entityManager.persist(postFromService);
+        //User user = saveEntity(postFromService.getUser());
+        //postFromService.setUser(user);
+        FastgramPost postInDb = saveEntity(postFromService);
+        return postInDb;
+    }
+
+    @Transactional
+    public <T extends ClassWithId, Serializable> T saveEntity(T entity) {
+        showRepositoryInfo();
+        if (entity.getId() == null) {
+            entityManager.persist(entity);
         } else {
-            FastgramPost postInDb = entityManager.merge(postFromService);
-            postFromService = postInDb;
+            T userInDb = entityManager.merge(entity);
+            entity = userInDb;
         }
-        return postFromService;
+        return entity;
     }
 
     @Override
@@ -66,6 +79,9 @@ public class FastgramRepositoryDbImpl implements FastgramRepository {
     }
 
     private static void showRepositoryInfo() {
-        System.out.println("This is the FastgramRepositoryDbImpl");
+        if (!shownRepositoryInfo) {
+            System.out.println("This is the FastgramRepositoryDbImpl");
+        }
+        shownRepositoryInfo = true;
     }
 }
