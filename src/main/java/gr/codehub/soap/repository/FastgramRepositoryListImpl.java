@@ -1,6 +1,7 @@
 package gr.codehub.soap.repository;
 
 import gr.codehub.soap.model.FastgramPost;
+import gr.codehub.soap.model.User;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Named;
 import java.text.ParseException;
@@ -38,7 +39,7 @@ public class FastgramRepositoryListImpl implements FastgramRepository {
         allPosts.add(createPost("bot819", "22/3/2024", "My new pet coconut tree enjoys me talking to it"));
     }
 
-    private static FastgramPost createPost(String user, String dateStr, String content) {
+    private static FastgramPost createPost(String userName, String dateStr, String content) {
         Integer id = allPosts.size();
         Date date = null;
         try {
@@ -47,6 +48,8 @@ public class FastgramRepositoryListImpl implements FastgramRepository {
             System.out.println("Invalid date: " + dateStr);
         }
         int views = (int) (Math.random() * 30) + 2;
+        User user = new User();
+        user.setName(userName);
         FastgramPost post = new FastgramPost(id, user, date, content, views, false);
         return post;
     }
@@ -88,7 +91,7 @@ public class FastgramRepositoryListImpl implements FastgramRepository {
     public List<FastgramPost> findPostsByUser(String user) {
         return allPosts.stream()
                 .filter(post -> !post.isDeleted())
-                .filter(post -> post.getUser().equalsIgnoreCase(user))
+                .filter(post -> post.getUser().getName().equalsIgnoreCase(user))
                 .map(FastgramPost::increaseViews)
                 .collect(Collectors.toList());
     }

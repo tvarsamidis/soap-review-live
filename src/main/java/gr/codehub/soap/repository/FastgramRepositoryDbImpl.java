@@ -11,13 +11,12 @@ import lombok.NoArgsConstructor;
 
 @Named("FastRepoDb")
 @ApplicationScoped
-//@NoArgsConstructor
+@NoArgsConstructor
 public class FastgramRepositoryDbImpl implements FastgramRepository {
 
     @PersistenceContext
     private EntityManager entityManager;
-    
-    
+
     @Override
     public FastgramPost deletePostById(int id) {
         throw new UnsupportedOperationException("Not supported yet.");
@@ -50,14 +49,15 @@ public class FastgramRepositoryDbImpl implements FastgramRepository {
 
     @Transactional
     @Override
-    public FastgramPost savePost(FastgramPost post) {
+    public FastgramPost savePost(FastgramPost postFromService) {
         showRepositoryInfo();
-       if (post.getId() == null) {
-        entityManager.persist(post);
-       } else {
-           post = entityManager.merge(post);
-       }
-       return post;
+        if (postFromService.getId() == null) {
+            entityManager.persist(postFromService);
+        } else {
+            FastgramPost postInDb = entityManager.merge(postFromService);
+            postFromService = postInDb;
+        }
+        return postFromService;
     }
 
     @Override

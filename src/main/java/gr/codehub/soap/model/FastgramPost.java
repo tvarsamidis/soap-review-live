@@ -28,10 +28,10 @@ public class FastgramPost {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-//    @ManyToOne
-//    @JoinColumn(name = "user_id", nullable = false)
-//    private User user;
-    private String user;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+    // private String user;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
@@ -46,3 +46,4 @@ public class FastgramPost {
         return this;
     }
 }
+
